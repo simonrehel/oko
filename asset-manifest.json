@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/oko/static/css/main.a80ad48f.css",
+    "main.js": "/oko/static/js/main.e417d635.js",
+    "index.html": "/oko/index.html",
+    "main.a80ad48f.css.map": "/oko/static/css/main.a80ad48f.css.map",
+    "main.e417d635.js.map": "/oko/static/js/main.e417d635.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a80ad48f.css",
+    "static/js/main.e417d635.js"
+  ]
+}
