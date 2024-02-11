@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/oko/static/css/main.99c25100.css",
-    "main.js": "/oko/static/js/main.8fba3bce.js",
+    "main.js": "/oko/static/js/main.567292e7.js",
     "static/media/cinq-trefle.mp3": "/oko/static/media/cinq-trefle.affc09984e7bf38007bd.mp3",
     "static/media/quatre-trefle.mp3": "/oko/static/media/quatre-trefle.a07c0346ebae765c5bac.mp3",
     "static/media/six-trefle.mp3": "/oko/static/media/six-trefle.9182e8c9d1f9c6eb6329.mp3",
@@ -56,10 +56,10 @@
     "static/media/as-pique.mp3": "/oko/static/media/as-pique.119f29fef9b050c62896.mp3",
     "index.html": "/oko/index.html",
     "main.99c25100.css.map": "/oko/static/css/main.99c25100.css.map",
-    "main.8fba3bce.js.map": "/oko/static/js/main.8fba3bce.js.map"
+    "main.567292e7.js.map": "/oko/static/js/main.567292e7.js.map"
   },
   "entrypoints": [
     "static/css/main.99c25100.css",
-    "static/js/main.8fba3bce.js"
+    "static/js/main.567292e7.js"
   ]
 }
