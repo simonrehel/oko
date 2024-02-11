@@ -108,31 +108,43 @@ function Game() {
                         'D': new Audio(damecarreau),
                         'R': new Audio(roicarreau)}};
 
-    const patterns = [ [[false, false, false, false, false],
-                        [false, true , true , true , false],
-                        [false, true , true,  true , false],
-                        [false, true , true , true , false],
-                        [false, false, false, false, false]],
-                       [[true , true , true , true , true ],
+    const patterns = [ [[[false, false, false, false, false],
+                        [false, false, false, false, false],
+                        [false, false, true,  false, false],
+                        [false, false, false, false, false],
+                        [false, false, false, false, false]]],
+
+                       [[[true , true , true , true , true ],
                         [false, false, false, false, false],
                         [false, false, false, false, false],
                         [false, false, false, false, false],
                         [false, false, false, false, false]],
+                        [[true, false, false, false, false ],
+                        [true, false, false, false, false],
+                        [true, false, false, false, false],
+                        [true, false, false, false, false],
+                        [true, false, false, false, false]],
+                        [[true, false, false, false, false],
+                        [false, true, false, false, false],
+                        [false, false, true, false, false],
+                        [false, false, false, true, false],
+                        [false, false, false, false, true]],
                        [[true , false, false, false, true ],
                         [false, false, false, false, false],
                         [false, false, false, false, false],
                         [false, false, false, false, false],
-                        [true , false, false, false, true ]],
-                       [[true , true , true , true , true ],
+                        [true , false, false, false, true ]]],
+
+                       [[[true , true , true , true , true ],
                         [true , false, false, false, true ],
                         [true , false, false, false, true ],
                         [true , false, false, false, true ],
-                        [true , true , true , true , true ]],
-                       [[true , true , true , true , true ],
+                        [true , true , true , true , true ]]],
+                       [[[true , true , true , true , true ],
                         [true , true , true , true , true ],
                         [true , true , true , true , true ],
                         [true , true , true , true , true ],
-                        [true , true , true , true , true ]]];
+                        [true , true , true , true , true ]]]];
 
     const shuffle = (cards) => {
         cards = [...cards];
@@ -173,6 +185,9 @@ function Game() {
         if (index === patterns.length) {
             index = 0;
         }
+
+        setCurrentSubPatternIndex(0);
+
         return index;
     }
 
@@ -211,10 +226,27 @@ function Game() {
         return 0;
     })
 
+    const [currentSubPatternIndex, setCurrentSubPatternIndex] = useState(() => {
+        return 0;
+    })
+
+    useEffect(() => {
+        let timer = setInterval(() => {
+            let index = currentSubPatternIndex + 1;
+            if (index === patterns[currentPatternIndex].length) {
+                index = 0;
+            }
+            setCurrentSubPatternIndex(index);
+        }, 1000);
+        return () => {
+            clearInterval(timer);
+        };
+    });
+
     return (
         <div class="desktop">
             <div class="left-panel"> 
-                <Pattern pattern={patterns[currentPatternIndex]}/>
+                <Pattern pattern={patterns[currentPatternIndex][currentSubPatternIndex]}/>
                 <div class="button-div"><button class="button" onClick={() => setCurrentPatternIndex(nextPattern())}>Changer de modèle</button></div>
                 <div class="button-div"><button class="button" onClick={() => setCards(shuffle(cards))}>Recommencer la partie</button></div>
                 <div class="button-div"><button class="button" onClick={() => draw(cards)}>Tirer une carte</button></div>
