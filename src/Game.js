@@ -214,7 +214,7 @@ function Game() {
         let timer = null;
         if (autoDraw){
             timer = setInterval(() => {
-                setCards((cards) => draw(cards));
+                draw(cards);
             }, delay * 1000);
         }
         return () => {
@@ -250,7 +250,7 @@ function Game() {
                 <div class="button-div"><button class="button" onClick={() => setCurrentPatternIndex(nextPattern())}>Changer de modèle</button></div>
                 <div class="button-div"><button class="button" onClick={() => setCards(shuffle(cards))}>Recommencer la partie</button></div>
                 <div class="button-div"><button class="button" onClick={() => draw(cards)}>Tirer une carte</button></div>
-                <div class="button-div"><button class="button" onClick={() => setAutoDraw(!autoDraw)}>{autoDraw ? 'Tirage manuel' : 'Tirage automatique'}</button></div>
+                <div class="button-div"><button class="button" onClick={() => setAutoDraw(!autoDraw)}>{autoDraw ? 'Tirage auto  \u23F8' : 'Tirage auto  \u23F5'}</button></div>
                 { autoDraw && 
                     <div class="delay">
                         <button class="button" disabled={delay < 3} onClick={() => setDelay(delay - 1)}>-</button>
