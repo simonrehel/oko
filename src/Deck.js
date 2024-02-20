@@ -3,7 +3,7 @@ import Card from "./Card";
 function Deck(props) {
     const cards = new Object();
     const suits = ["♠︎", "♥︎", "♣︎", "♦︎"];
-    const values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "V", "D", "R"];
+    const values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
     for (const suit in suits) {
         cards[suits[suit]] = new Object();
         for (const val in values) {
@@ -45,9 +45,9 @@ function Deck(props) {
                     <td className={`${ cards['♣︎']['8'] }`}>8</td>
                     <td className={`${ cards['♣︎']['9'] }`}>9</td>
                     <td className={`${ cards['♣︎']['10'] }`}>10</td>
-                    <td className={`${ cards['♣︎']['V'] }`}>V</td>
-                    <td className={`${ cards['♣︎']['D'] }`}>D</td>
-                    <td className={`${ cards['♣︎']['R'] }`}>R</td>
+                    <td className={`${ cards['♣︎']['J'] }`}>J</td>
+                    <td className={`${ cards['♣︎']['Q'] }`}>Q</td>
+                    <td className={`${ cards['♣︎']['K'] }`}>K</td>
                 </tr>
                 <tr>
                     <th className='card-red'>♦︎</th>
@@ -61,9 +61,9 @@ function Deck(props) {
                     <td className={`${ cards['♦︎']['8'] }`}>8</td>
                     <td className={`${ cards['♦︎']['9'] }`}>9</td>
                     <td className={`${ cards['♦︎']['10'] }`}>10</td>
-                    <td className={`${ cards['♦︎']['V'] }`}>V</td>
-                    <td className={`${ cards['♦︎']['D'] }`}>D</td>
-                    <td className={`${ cards['♦︎']['R'] }`}>R</td>
+                    <td className={`${ cards['♦︎']['J'] }`}>J</td>
+                    <td className={`${ cards['♦︎']['Q'] }`}>Q</td>
+                    <td className={`${ cards['♦︎']['K'] }`}>K</td>
                 </tr>
                 <tr>
                     <th className='card-black'>♠︎</th>
@@ -77,9 +77,9 @@ function Deck(props) {
                     <td className={`${ cards['♠︎']['8'] }`}>8</td>
                     <td className={`${ cards['♠︎']['9'] }`}>9</td>
                     <td className={`${ cards['♠︎']['10'] }`}>10</td>
-                    <td className={`${ cards['♠︎']['V'] }`}>V</td>
-                    <td className={`${ cards['♠︎']['D'] }`}>D</td>
-                    <td className={`${ cards['♠︎']['R'] }`}>R</td>
+                    <td className={`${ cards['♠︎']['J'] }`}>J</td>
+                    <td className={`${ cards['♠︎']['Q'] }`}>Q</td>
+                    <td className={`${ cards['♠︎']['K'] }`}>K</td>
                 </tr>
                 <tr>
                     <th className='card-red'>♥︎</th>
@@ -93,19 +93,19 @@ function Deck(props) {
                     <td className={`${ cards['♥︎']['8'] }`}>8</td>
                     <td className={`${ cards['♥︎']['9'] }`}>9</td>
                     <td className={`${ cards['♥︎']['10'] }`}>10</td>
-                    <td className={`${ cards['♥︎']['V'] }`}>V</td>
-                    <td className={`${ cards['♥︎']['D'] }`}>D</td>
-                    <td className={`${ cards['♥︎']['R'] }`}>R</td>
+                    <td className={`${ cards['♥︎']['J'] }`}>J</td>
+                    <td className={`${ cards['♥︎']['Q'] }`}>Q</td>
+                    <td className={`${ cards['♥︎']['K'] }`}>K</td>
                 </tr>
             </table>
             <br/>
             <div className="deck">
                 {lastDrawn.map((card) => (
-                    <Card suit={card.suit} value={card.val} last={true}/>
+                    <Card suit={card.suit} value={card.val} last={true} image={card.image}/>
                 ))}
 
                 {history.map((card) => (
-                    <Card suit={card.suit} value={card.val}/>
+                    <Card suit={card.suit} value={card.val} image={card.image}/>
                 ))}
 
             </div>

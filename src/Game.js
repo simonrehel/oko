@@ -65,9 +65,9 @@ function Game() {
                         '8': new Audio(huitpique),
                         '9': new Audio(neufpique),
                         '10': new Audio(dixpique),
-                        'V': new Audio(valetpique),
-                        'D': new Audio(damepique),
-                        'R': new Audio(roipique)},
+                        'J': new Audio(valetpique),
+                        'Q': new Audio(damepique),
+                        'K': new Audio(roipique)},
                  "♥︎": { 'A': new Audio(ascoeur),
                         '2': new Audio(deuxcoeur),
                         '3': new Audio(troiscoeur),
@@ -78,9 +78,9 @@ function Game() {
                         '8': new Audio(huitcoeur),
                         '9': new Audio(neufcoeur),
                         '10': new Audio(dixcoeur),
-                        'V': new Audio(valetcoeur),
-                        'D': new Audio(damecoeur),
-                        'R': new Audio(roicoeur)},
+                        'J': new Audio(valetcoeur),
+                        'Q': new Audio(damecoeur),
+                        'K': new Audio(roicoeur)},
                  "♣︎": { 'A': new Audio(astrefle),
                         '2': new Audio(deuxtrefle),
                         '3': new Audio(troistrefle),
@@ -91,9 +91,9 @@ function Game() {
                         '8': new Audio(huittrefle),
                         '9': new Audio(neuftrefle),
                         '10': new Audio(dixtrefle),
-                        'V': new Audio(valettrefle),
-                        'D': new Audio(dametrefle),
-                        'R': new Audio(roitrefle)},
+                        'J': new Audio(valettrefle),
+                        'Q': new Audio(dametrefle),
+                        'K': new Audio(roitrefle)},
                  "♦︎": { 'A': new Audio(ascarreau),
                         '2': new Audio(deuxcarreau),
                         '3': new Audio(troiscarreau),
@@ -104,9 +104,9 @@ function Game() {
                         '8': new Audio(huitcarreau),
                         '9': new Audio(neufcarreau),
                         '10': new Audio(dixcarreau),
-                        'V': new Audio(valetcarreau),
-                        'D': new Audio(damecarreau),
-                        'R': new Audio(roicarreau)}};
+                        'J': new Audio(valetcarreau),
+                        'Q': new Audio(damecarreau),
+                        'K': new Audio(roicarreau)}};
 
     const patterns = [ [[[false, false, false, false, false],
                         [false, false, false, false, false],
@@ -172,7 +172,9 @@ function Game() {
         for (let i in cards) {
             if (!cards[i].drawn) {
                 newCards[i].drawn = true;
-                mp3[cards[i].suit][cards[i].val].play();
+                if (!muted) {
+                    mp3[cards[i].suit][cards[i].val].play();
+                }
                 break;
             }
         }
@@ -193,17 +195,20 @@ function Game() {
 
     const [autoDraw, setAutoDraw] = useState(false);
 
+    const [muted, setMuted] = useState(true);
+
     const [delay, setDelay] = useState(5);
 
     const [cards, setCards] = useState(() => {
         const suits = ["♠︎", "♥︎", "♣︎", "♦︎"];
-        const values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "V", "D", "R"];
+        const values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
+        const suitNames = {"♠︎": "SPADE", "♥︎": "HEART", "♣︎": "CLUB", "♦︎": "DIAMOND"};
         let cards = [];
         let card = [];
 
         for (let x = 0; x < suits.length; x++) {
             for (let y = 0; y < values.length; y++) {
-                card = {suit: suits[x], val: values[y], drawn: false};
+                card = {suit: suits[x], val: values[y], drawn: false, image: `${suitNames[suits[x]]}_${values[y]}`};
                 cards.push(card);
             }
         };
@@ -257,6 +262,12 @@ function Game() {
                         { delay } secondes
                         <button class="button" disabled={delay > 29} onClick={() => setDelay(delay + 1)}>+</button>
                     </div>
+                }
+                { muted && 
+                    <div class="button-div"><button class="button" onClick={() => setMuted(false)}>🔇</button></div>
+                }
+                { !muted && 
+                    <div class="button-div"><button class="button" onClick={() => setMuted(true)}>🔊</button></div>
                 }
             </div>
             <div class="right-panel"> 
