@@ -90,8 +90,13 @@
   display: inline-block;
 }
 
-.deck td, .deck th {
+.deck td {
   width: 75px;
+  height: 75px;
+}
+
+.deck th {
+  width: 50px;
   height: 75px;
 }
 
@@ -135,4 +140,38 @@
 .delay {
   color: white;
   text-align: center;
+}
+
+.big-circle {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  padding: 10px;
+  background: #fff;
+  border: 3px solid #000;
+  color: #000;
+  text-align: center;
+  font: 32px Arial, sans-serif;
+  margin: 25px;
+}
+
+.circle {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  padding: 10px;
+  background: #fff;
+  border: 3px solid #000;
+  color: #000;
+  text-align: center;
+  font: 32px Arial, sans-serif;
+  margin: 25px;
+}
+
+.big-centered-line {
+  line-height: 150px;
+}
+
+.centered-line {
+  line-height: 100px;
 }

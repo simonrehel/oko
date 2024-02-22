@@ -1,6 +1,6 @@
 import Card from "./Card";
 
-function Deck(props) {
+function OkoDeck(props) {
     const cards = new Object();
     const suits = ["♠︎", "♥︎", "♣︎", "♦︎"];
     const values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
@@ -113,4 +113,4 @@ function Deck(props) {
     );
 }
 
-export default Deck;
+export default OkoDeck;

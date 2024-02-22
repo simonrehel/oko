@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Deck from "./Deck";
+import OkoDeck from "./OkoDeck";
+import BingoDeck from "./BingoDeck";
 import Pattern from "./Pattern";
 import ascoeur from "./mp3/as-coeur.mp3";
 import deuxcoeur from "./mp3/deux-coeur.mp3";
@@ -146,27 +147,27 @@ function Game() {
                         [true , true , true , true , true ],
                         [true , true , true , true , true ]]]];
 
-    const shuffle = (cards) => {
-        cards = [...cards];
-        let counter = cards.length;
+    const shuffle = (items) => {
+        items = [...items];
+        let counter = items.length;
         let t;
         let i;
         
         while (counter) {
             i = Math.floor(Math.random() * counter-- );
-            t = cards[counter];
-            cards[counter] = cards[i];
-            cards[i] = t;
+            t = items[counter];
+            items[counter] = items[i];
+            items[i] = t;
         }
 
-        for (let i in cards) {
-            cards[i].drawn = false;
+        for (let i in items) {
+            items[i].drawn = false;
         }
 
-        return cards;
+        return items;
     };
 
-    const draw = (cards) => {
+    const drawCard = (cards) => {
         let newCards = [...cards];
 
         for (let i in cards) {
@@ -182,6 +183,21 @@ function Game() {
         setCards(newCards);
     };
 
+    const drawBall = (balls) => {
+        let newBalls = [...balls];
+
+        for (let i in balls) {
+            if (!balls[i].drawn) {
+                newBalls[i].drawn = true;
+
+                break;
+            }
+        }
+
+        setBalls(newBalls);
+    };
+
+
     const nextPattern = () => {
         let index = currentPatternIndex + 1;
         if (index === patterns.length) {
@@ -192,6 +208,8 @@ function Game() {
 
         return index;
     }
+
+    const [oko, setOko] = useState(true);
 
     const [autoDraw, setAutoDraw] = useState(false);
 
@@ -215,11 +233,29 @@ function Game() {
         return shuffle(cards);
     });
 
+    const [balls, setBalls] = useState(() => {
+        const letters = ["B", "I", "N", "G", "O"];
+        let balls = [];
+        let ball = [];
+
+        for (let x = 0; x < letters.length; x++) {
+            for (let y = 1; y <= 15; y++) {
+                ball = {letter: letters[x], val: x*15+y, drawn: false};
+                balls.push(ball);
+            }
+        };
+        return shuffle(balls);
+    });
+
     useEffect(() => {
         let timer = null;
         if (autoDraw){
             timer = setInterval(() => {
-                draw(cards);
+                if (oko) {
+                    drawCard(cards);
+                } else {
+                    drawBall(balls);
+                }
             }, delay * 1000);
         }
         return () => {
@@ -252,10 +288,25 @@ function Game() {
         <div class="desktop">
             <div class="left-panel"> 
                 <Pattern pattern={patterns[currentPatternIndex][currentSubPatternIndex]}/>
+                <div class="button-div"><button class="button" onClick={() => {setOko(!oko); setAutoDraw(false)}}>{oko ? 'Aller au bingo' : 'Aller à OKO'}</button></div>
                 <div class="button-div"><button class="button" onClick={() => setCurrentPatternIndex(nextPattern())}>Changer de modèle</button></div>
-                <div class="button-div"><button class="button" onClick={() => setCards(shuffle(cards))}>Recommencer la partie</button></div>
-                <div class="button-div"><button class="button" onClick={() => draw(cards)}>Tirer une carte</button></div>
-                <div class="button-div"><button class="button" onClick={() => setAutoDraw(!autoDraw)}>{autoDraw ? 'Tirage auto  \u23F8' : 'Tirage auto  \u23F5'}</button></div>
+
+                <div class="button-div"><button class="button" onClick={() => { setCards(shuffle(cards)); setBalls(shuffle(balls))}}>Recommencer la partie</button></div>
+
+                { oko &&
+                    <div>
+                        <div class="button-div"><button class="button" onClick={() => drawCard(cards)}>Tirer une carte</button></div>
+                        <div class="button-div"><button class="button" onClick={() => setAutoDraw(!autoDraw)}>{autoDraw ? 'Tirage auto  \u23F8' : 'Tirage auto  \u23F5'}</button></div>
+                    </div>
+                }
+
+                { !oko &&
+                    <div>
+                        <div class="button-div"><button class="button" onClick={() => drawBall(balls)}>Tirer une boule</button></div>
+                        <div class="button-div"><button class="button" onClick={() => setAutoDraw(!autoDraw)}>{autoDraw ? 'Tirage auto  \u23F8' : 'Tirage auto  \u23F5'}</button></div>
+                    </div>
+                }
+
                 { autoDraw && 
                     <div class="delay">
                         <button class="button" disabled={delay < 3} onClick={() => setDelay(delay - 1)}>-</button>
@@ -263,15 +314,21 @@ function Game() {
                         <button class="button" disabled={delay > 29} onClick={() => setDelay(delay + 1)}>+</button>
                     </div>
                 }
-                { muted && 
+                { oko && muted && 
                     <div class="button-div"><button class="button" onClick={() => setMuted(false)}>🔇</button></div>
                 }
-                { !muted && 
+                { oko && !muted && 
                     <div class="button-div"><button class="button" onClick={() => setMuted(true)}>🔊</button></div>
                 }
+
             </div>
             <div class="right-panel"> 
-                <Deck cards={cards}/>
+                { oko && 
+                    <OkoDeck cards={cards}/>
+                }
+                { !oko &&
+                    <BingoDeck balls={balls}/>
+                }
             </div>
         </div>
     );
