@@ -144,8 +144,8 @@
 
 .big-circle {
   border-radius: 50%;
-  width: 150px;
-  height: 150px;
+  width: 225px;
+  height: 225px;
   padding: 10px;
   background: #fff;
   border: 3px solid #000;
@@ -165,13 +165,93 @@
   color: #000;
   text-align: center;
   font: 32px Arial, sans-serif;
-  margin: 25px;
+  margin: 90px 25px 90px 25px;
+}
+
+.big-inner-circle {
+  border-radius: 50%;
+  width:125px;
+  height: 125px;
+  padding: 10px;
+  background: #fff;
+  border: 3px solid #000;
+  color: #000;
+  text-align: center;
+  font: 32px Arial, sans-serif;
+  margin: 40px;
+}
+
+.inner-circle {
+  border-radius: 50%;
+  width: 75px;
+  height: 75px;
+  padding: 10px;
+  background: #fff;
+  border: 3px solid #000;
+  color: #000;
+  text-align: center;
+  font: 32px Arial, sans-serif;
+}
+
+.B-color {
+  background-color: rgb(49, 145, 231);
+	box-shadow: inset -25px -15px 40px rgba(0,0,0,.3);
+	background-image: linear-gradient(-45deg, rgba(255,255,220,.3) 0%, transparent 100%);
+}
+
+.I-color {
+  background-color: rgb(5, 108, 43);
+	box-shadow: inset -25px -15px 40px rgba(0,0,0,.3);
+	background-image: linear-gradient(-45deg, rgba(255,255,220,.3) 0%, transparent 100%);
+}
+
+.N-color {
+  background-color: rgb(204, 23, 23);
+	box-shadow: inset -25px -15px 40px rgba(0,0,0,.3);
+	background-image: linear-gradient(-45deg, rgba(255,255,220,.3) 0%, transparent 100%);
+}
+
+.G-color {
+  background-color: rgb(231, 222, 49);
+	box-shadow: inset -25px -15px 40px rgba(0,0,0,.3);
+	background-image: linear-gradient(-45deg, rgba(255,255,220,.3) 0%, transparent 100%);
+}
+
+.O-color {
+  background-color: rgb(242, 148, 7);
+	box-shadow: inset -25px -15px 40px rgba(0,0,0,.3);
+	background-image: linear-gradient(-45deg, rgba(255,255,220,.3) 0%, transparent 100%);
+}
+
+.B-text-color {
+  -webkit-text-stroke: 2px black;
+  color: rgb(49, 145, 231);
+}
+
+.I-text-color {
+  -webkit-text-stroke: 2x black;
+  color: rgb(5, 108, 43);
+}
+
+.N-text-color {
+  -webkit-text-stroke: 2px black;
+  color: rgb(204, 23, 23);
+}
+
+.G-text-color {
+  -webkit-text-stroke: 2px black;
+  color: rgb(231, 222, 49);
+}
+
+.O-text-color {
+  -webkit-text-stroke: 2px black;
+  color: rgb(242, 148, 7);
 }
 
 .big-centered-line {
-  line-height: 150px;
+  line-height: 125px;
 }
 
 .centered-line {
-  line-height: 100px;
+  line-height: 75px;
 }

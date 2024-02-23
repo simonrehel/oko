@@ -34,7 +34,7 @@ function BingoDeck(props) {
             <table className="deck">
                 {[0,1,2,3,4].map(letter => (
                     <tr>
-                        <th>{letters[letter]}</th>
+                        <th className={`${ letters[letter] }-text-color`}>{letters[letter]}</th>
                         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map(val => (
                             <td className={`${ balls[letters[letter]][letter*15+val] }`}>{letter*15+val}</td>
                         ))}
