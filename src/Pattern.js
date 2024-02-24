@@ -6,7 +6,7 @@ function Pattern(props) {
                     <tr>
                         {
                             row.map((column) => (
-                                <td><span className={column ? 'dot' : 'no-dot'}></span></td>
+                                <td>{column ? '\u2022' : ''}</td>
                             ))
                         }
                     </tr>

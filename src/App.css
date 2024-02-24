@@ -33,8 +33,9 @@
 }
 
 .pattern {
-  border: 1px solid;
+  border: 10px solid;
   border-collapse: collapse;
+  border-color: #1D1D1D;
   width: 200px;
   height: 200px;
   margin: 10px auto;
@@ -42,9 +43,17 @@
   background-color: white;
 }
 
+.pattern td {
+  width: 25px;
+  height: 25px;
+  border: 2px solid;
+  border-color: #1D1D1D;
+  font-size: 20px;
+}
+
 .button {
   padding: 8px 16px;
-  margin: 16px;
+  margin: 10px;
   background-color: transparent;
   border: 1px solid transparent;
   color: white;
@@ -71,23 +80,9 @@
 
 .right-panel {
   margin-left: 20%;
+  margin-right: 10px;
+  margin-top: 10px;
   height: 100px;
-}
-
-.dot {
-  height: 25px;
-  width: 25px;
-  background-color: #FF0000;
-  border-radius: 50%;
-  display: inline-block;
-}
-
-.no-dot {
-  height: 25px;
-  width: 25px;
-  background-color: #FFFFFF;
-  border-radius: 50%;
-  display: inline-block;
 }
 
 .deck td {
@@ -96,12 +91,13 @@
 }
 
 .deck th {
-  width: 50px;
+  min-width: 75px;
   height: 75px;
 }
 
 .deck {
-  font-size: 60px;
+  font-size: 55px;
+  letter-spacing: -3px;
   border-collapse: collapse;
   text-align: center;
   background-color: #1D1D1D;
@@ -218,40 +214,39 @@
 }
 
 .O-color {
-  background-color: rgb(242, 148, 7);
+  background-color: rgb(235, 152, 78);
 	box-shadow: inset -25px -15px 40px rgba(0,0,0,.3);
 	background-image: linear-gradient(-45deg, rgba(255,255,220,.3) 0%, transparent 100%);
 }
 
 .B-text-color {
-  -webkit-text-stroke: 2px black;
   color: rgb(49, 145, 231);
 }
 
 .I-text-color {
-  -webkit-text-stroke: 2x black;
   color: rgb(5, 108, 43);
 }
 
 .N-text-color {
-  -webkit-text-stroke: 2px black;
   color: rgb(204, 23, 23);
 }
 
 .G-text-color {
-  -webkit-text-stroke: 2px black;
   color: rgb(231, 222, 49);
 }
 
 .O-text-color {
-  -webkit-text-stroke: 2px black;
   color: rgb(242, 148, 7);
 }
 
 .big-centered-line {
   line-height: 125px;
+  font-size: 55px;
+  letter-spacing: -3px;
 }
 
 .centered-line {
   line-height: 75px;
+  font-size: 40px;
+  letter-spacing: -3px;
 }

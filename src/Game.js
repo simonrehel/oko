@@ -54,6 +54,8 @@ import dixpique from "./mp3/dix-pique.mp3";
 import valetpique from "./mp3/valet-pique.mp3";
 import damepique from "./mp3/dame-pique.mp3";
 import roipique from "./mp3/roi-pique.mp3";
+import speaker from "./images/speaker.png";
+import mutedspeaker from "./images/muted-speaker.png"
 
 function Game() {
     const mp3 = {"♠︎": { 'A': new Audio(aspique),
@@ -285,7 +287,7 @@ function Game() {
     });
 
     return (
-        <div class="desktop">
+        <div>
             <div class="left-panel"> 
                 <Pattern pattern={patterns[currentPatternIndex][currentSubPatternIndex]}/>
                 <div class="button-div"><button class="button" onClick={() => {setOko(!oko); setAutoDraw(false)}}>{oko ? 'Aller au bingo' : 'Aller à OKO'}</button></div>
@@ -315,10 +317,10 @@ function Game() {
                     </div>
                 }
                 { oko && muted && 
-                    <div class="button-div"><button class="button" onClick={() => setMuted(false)}>🔇</button></div>
+                    <div class="button-div"><button class="button" onClick={() => setMuted(false)}><img src={mutedspeaker}></img></button></div>
                 }
                 { oko && !muted && 
-                    <div class="button-div"><button class="button" onClick={() => setMuted(true)}>🔊</button></div>
+                    <div class="button-div"><button class="button" onClick={() => setMuted(true)}><img src={speaker}></img></button></div>
                 }
 
             </div>
