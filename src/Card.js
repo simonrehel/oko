@@ -109,7 +109,7 @@ function Card(props) {
 
     return (
     <div className={`${ props.last ? 'bigger-card' : 'card' }`}>
-        <img src={ images[props.image] }></img>
+        <img src={ images[props.image] } alt="carte"></img>
     </div>);
 }
 

@@ -1,10 +1,10 @@
 import Ball from "./Ball";
 
 function BingoDeck(props) {
-    const balls = new Object();
+    const balls = {};
     const letters = ["B", "I", "N", "G", "O"];
     for (const letter in letters) {
-        balls[letters[letter]] = new Object();
+        balls[letters[letter]] = {};
         for (let x = 1; x <= 15; x++) {
             balls[letters[letter]][letter*15+x] = 'not-drawn';
         }
@@ -32,14 +32,16 @@ function BingoDeck(props) {
     return (
         <div>
             <table className="deck">
-                {[0,1,2,3,4].map(letter => (
-                    <tr>
-                        <th className={`${ letters[letter] }-text-color`}>{letters[letter]}</th>
-                        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map(val => (
-                            <td className={`${ balls[letters[letter]][letter*15+val] }`}>{letter*15+val}</td>
-                        ))}
-                    </tr>
-                ))}
+                <tbody>
+                    {[0,1,2,3,4].map(letter => (
+                        <tr key={letter}>
+                            <th className={`${ letters[letter] }-text-color`}>{letters[letter]}</th>
+                            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map(val => (
+                                <td key={letter*15+val} className={`${ balls[letters[letter]][letter*15+val] }`}>{letter*15+val}</td>
+                            ))}
+                        </tr>
+                    ))}
+                </tbody>
             </table>
             <br/>
             <div className="deck">

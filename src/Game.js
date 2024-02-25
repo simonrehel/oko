@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import OkoDeck from "./OkoDeck";
 import BingoDeck from "./BingoDeck";
-import Pattern from "./Pattern";
+import Patterns from "./Patterns";
 import ascoeur from "./mp3/as-coeur.mp3";
 import deuxcoeur from "./mp3/deux-coeur.mp3";
 import troiscoeur from "./mp3/trois-coeur.mp3";
@@ -111,44 +113,6 @@ function Game() {
                         'Q': new Audio(damecarreau),
                         'K': new Audio(roicarreau)}};
 
-    const patterns = [ [[[false, false, false, false, false],
-                        [false, false, false, false, false],
-                        [false, false, true,  false, false],
-                        [false, false, false, false, false],
-                        [false, false, false, false, false]]],
-
-                       [[[true , true , true , true , true ],
-                        [false, false, false, false, false],
-                        [false, false, false, false, false],
-                        [false, false, false, false, false],
-                        [false, false, false, false, false]],
-                        [[true, false, false, false, false ],
-                        [true, false, false, false, false],
-                        [true, false, false, false, false],
-                        [true, false, false, false, false],
-                        [true, false, false, false, false]],
-                        [[true, false, false, false, false],
-                        [false, true, false, false, false],
-                        [false, false, true, false, false],
-                        [false, false, false, true, false],
-                        [false, false, false, false, true]],
-                       [[true , false, false, false, true ],
-                        [false, false, false, false, false],
-                        [false, false, false, false, false],
-                        [false, false, false, false, false],
-                        [true , false, false, false, true ]]],
-
-                       [[[true , true , true , true , true ],
-                        [true , false, false, false, true ],
-                        [true , false, false, false, true ],
-                        [true , false, false, false, true ],
-                        [true , true , true , true , true ]]],
-                       [[[true , true , true , true , true ],
-                        [true , true , true , true , true ],
-                        [true , true , true , true , true ],
-                        [true , true , true , true , true ],
-                        [true , true , true , true , true ]]]];
-
     const shuffle = (items) => {
         items = [...items];
         let counter = items.length;
@@ -198,18 +162,6 @@ function Game() {
 
         setBalls(newBalls);
     };
-
-
-    const nextPattern = () => {
-        let index = currentPatternIndex + 1;
-        if (index === patterns.length) {
-            index = 0;
-        }
-
-        setCurrentSubPatternIndex(0);
-
-        return index;
-    }
 
     const [oko, setOko] = useState(true);
 
@@ -263,68 +215,71 @@ function Game() {
         return () => {
             clearInterval(timer);
         };
-    }, [autoDraw, delay]);
-
-    const [currentPatternIndex, setCurrentPatternIndex] = useState(() => {
-        return 0;
-    })
-
-    const [currentSubPatternIndex, setCurrentSubPatternIndex] = useState(() => {
-        return 0;
-    })
-
-    useEffect(() => {
-        let timer = setInterval(() => {
-            let index = currentSubPatternIndex + 1;
-            if (index === patterns[currentPatternIndex].length) {
-                index = 0;
-            }
-            setCurrentSubPatternIndex(index);
-        }, 1000);
-        return () => {
-            clearInterval(timer);
-        };
     });
+
+    const restartConfirm = () => {
+        confirmAlert({
+          title: 'Recommencer',
+          message: 'Voulez-vous vraiment recommencer la partie?',
+          buttons: [
+            {
+              label: 'Oui',
+              onClick: () => { setCards(shuffle(cards)); setBalls(shuffle(balls)) }
+            },
+            {
+              label: 'Non',
+              onClick: () => {}
+            }
+          ]
+        });
+      };
 
     return (
         <div>
-            <div class="left-panel"> 
-                <Pattern pattern={patterns[currentPatternIndex][currentSubPatternIndex]}/>
-                <div class="button-div"><button class="button" onClick={() => {setOko(!oko); setAutoDraw(false)}}>{oko ? 'Aller au bingo' : 'Aller à OKO'}</button></div>
-                <div class="button-div"><button class="button" onClick={() => setCurrentPatternIndex(nextPattern())}>Changer de modèle</button></div>
+            <div className="left-panel"> 
+                <Patterns/>
 
-                <div class="button-div"><button class="button" onClick={() => { setCards(shuffle(cards)); setBalls(shuffle(balls))}}>Recommencer la partie</button></div>
+                <div className="button-div"></div>
+
+                <div className="button-div"><button className="button" onClick={() => restartConfirm() }>Recommencer la partie</button></div>
 
                 { oko &&
                     <div>
-                        <div class="button-div"><button class="button" onClick={() => drawCard(cards)}>Tirer une carte</button></div>
-                        <div class="button-div"><button class="button" onClick={() => setAutoDraw(!autoDraw)}>{autoDraw ? 'Tirage auto  \u23F8' : 'Tirage auto  \u23F5'}</button></div>
+                        <div className="button-div"><button className="button" onClick={() => drawCard(cards)}>Tirer une carte</button></div>
+                        <div className="button-div"><button className="button" onClick={() => setAutoDraw(!autoDraw)}>{autoDraw ? 'Tirage auto  \u23F8' : 'Tirage auto  \u23F5'}</button></div>
                     </div>
                 }
 
                 { !oko &&
                     <div>
-                        <div class="button-div"><button class="button" onClick={() => drawBall(balls)}>Tirer une boule</button></div>
-                        <div class="button-div"><button class="button" onClick={() => setAutoDraw(!autoDraw)}>{autoDraw ? 'Tirage auto  \u23F8' : 'Tirage auto  \u23F5'}</button></div>
+                        <div className="button-div"><button className="button" onClick={() => drawBall(balls)}>Tirer une boule</button></div>
+                        <div className="button-div"><button className="button" onClick={() => setAutoDraw(!autoDraw)}>{autoDraw ? 'Tirage auto  \u23F8' : 'Tirage auto  \u23F5'}</button></div>
                     </div>
                 }
 
                 { autoDraw && 
-                    <div class="delay">
-                        <button class="button" disabled={delay < 3} onClick={() => setDelay(delay - 1)}>-</button>
+                    <div className="delay">
+                        <button className="button" disabled={delay < 3} onClick={() => setDelay(delay - 1)}>-</button>
                         { delay } secondes
-                        <button class="button" disabled={delay > 29} onClick={() => setDelay(delay + 1)}>+</button>
+                        <button className="button" disabled={delay > 29} onClick={() => setDelay(delay + 1)}>+</button>
                     </div>
                 }
+
+                <div className="button-div"><button className="button" onClick={() => {setOko(!oko); setAutoDraw(false)}}>{oko ? 'Aller au bingo' : 'Aller à OKO'}</button></div>
+
                 { oko && muted && 
-                    <div class="button-div"><button class="button" onClick={() => setMuted(false)}><img src={mutedspeaker}></img></button></div>
+                    <div className="button-div"><button className="button" onClick={() => setMuted(false)}>
+                        <img src={mutedspeaker} alt="Muted"></img></button>
+                    </div>
                 }
                 { oko && !muted && 
-                    <div class="button-div"><button class="button" onClick={() => setMuted(true)}><img src={speaker}></img></button></div>
+                    <div className="button-div"><button className="button" onClick={() => setMuted(true)}>
+                        <img src={speaker} alt="Unmuted"></img></button>
+                    </div>
                 }
 
             </div>
-            <div class="right-panel"> 
+            <div className="right-panel"> 
                 { oko && 
                     <OkoDeck cards={cards}/>
                 }
