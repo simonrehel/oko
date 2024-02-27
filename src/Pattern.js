@@ -9,7 +9,9 @@ function Pattern(props) {
                     rows.map((row) => (
                         <tr key={row}>
                             {columns.map((column) => (
-                                <td key={row*column}>{props.pattern.includes((row-1)*5 + column) ? '\u26AB' : ''}</td>
+                                <td key={row*column}>
+                                    <span className={props.pattern.includes((row-1)*5 + column) ? "dot " + props.color: "no-dot"}></span>
+                                </td>
                             ))}
                         </tr>
                     ))

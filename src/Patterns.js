@@ -61,12 +61,18 @@ function Patterns() {
         Voilier: [[3,8,9,13,16,17,18,19,20,22,23,24]],
     };
 
+    const colors = ['Bleu', 'Orange', 'Noir', 'Rouge', 'Vert'];
+
     const [currentPatternName, setCurrentPatternName] = useState(() => {
         return "Ligne ou 4 coins";
     })
 
     const [currentSubPatternIndex, setCurrentSubPatternIndex] = useState(() => {
         return 0;
+    })
+
+    const [currentColor, setCurrentColor] = useState(() => {
+        return "Rouge";
     })
 
     useEffect(() => {
@@ -87,10 +93,16 @@ function Patterns() {
         patternOptions.push(<option value={key} key={key}>{key}</option>);
     }
 
+    const colorOptions = [];
+    for (const color in colors) {
+        colorOptions.push(<option value={colors[color]} key={colors[color]}>{colors[color]}</option>);
+    }
+
     return (
         <div className="button-div">
-            <Pattern pattern={patterns[currentPatternName][currentSubPatternIndex]}></Pattern>
-            <select  onChange={e => {setCurrentSubPatternIndex(0); setCurrentPatternName(e.target.value)}} value={currentPatternName}>{patternOptions}</select>
+            <Pattern pattern={patterns[currentPatternName][currentSubPatternIndex]} color={currentColor}></Pattern>
+            <select onChange={e => {setCurrentSubPatternIndex(0); setCurrentPatternName(e.target.value)}} value={currentPatternName}>{patternOptions}</select>
+            <select onChange={e => setCurrentColor(e.target.value)} value={currentColor}>{colorOptions}</select>
         </div>
     );
 }
