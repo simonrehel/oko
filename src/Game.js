@@ -57,7 +57,9 @@ import valetpique from "./mp3/valet-pique.mp3";
 import damepique from "./mp3/dame-pique.mp3";
 import roipique from "./mp3/roi-pique.mp3";
 import speaker from "./images/speaker.png";
-import mutedspeaker from "./images/muted-speaker.png"
+import mutedspeaker from "./images/muted-speaker.png";
+import cardsShuffling from "./images/cards-shuffling.gif";
+import ballsShuffling from "./images/balls-shuffling.gif";
 
 function Game() {
     const mp3 = {"♠︎": { 'A': new Audio(aspique),
@@ -230,7 +232,8 @@ function Game() {
               label: 'Non',
               onClick: () => {}
             }
-          ]
+          ],
+          childrenElement: () => <img className="gif" src={oko ? cardsShuffling : ballsShuffling} alt="Shuffling ..."></img>
         });
       };
 

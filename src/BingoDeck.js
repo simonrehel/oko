@@ -44,7 +44,7 @@ function BingoDeck(props) {
                 </tbody>
             </table>
             <br/>
-            <div className="deck">
+            <div className="deck deck-bingo">
                 {lastDrawn.map((ball) => (
                     <Ball letter={ball.letter} value={ball.val} last={true}/>
                 ))}
@@ -52,8 +52,8 @@ function BingoDeck(props) {
                 {history.map((ball) => (
                     <Ball letter={ball.letter} value={ball.val}/>
                 ))}
-
             </div>
+            <div className="deck-footer">Boules tirées: {nbDrawn}</div>
         </div>
     );
 }

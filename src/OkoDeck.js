@@ -101,7 +101,7 @@ function OkoDeck(props) {
                 </tbody>
             </table>
             <br/>
-            <div className="deck">
+            <div className="deck deck-oko">
                 {lastDrawn.map((card) => (
                     <Card suit={card.suit} value={card.val} last={true} image={card.image}/>
                 ))}
@@ -109,8 +109,8 @@ function OkoDeck(props) {
                 {history.map((card) => (
                     <Card suit={card.suit} value={card.val} image={card.image}/>
                 ))}
-
             </div>
+            <div className="deck-footer">Cartes tirées: {nbDrawn}</div>
         </div>
     );
 }
