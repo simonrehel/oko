@@ -1,7 +1,9 @@
 {
   "files": {
-    "main.css": "/oko/static/css/main.77339ece.css",
-    "main.js": "/oko/static/js/main.50f85d67.js",
+    "main.css": "/oko/static/css/main.62bc6952.css",
+    "main.js": "/oko/static/js/main.bf8a9413.js",
+    "static/media/balls-shuffling.gif": "/oko/static/media/balls-shuffling.db2cf4a8803ff640f795.gif",
+    "static/media/cards-shuffling.gif": "/oko/static/media/cards-shuffling.02407032d025e2c93ea8.gif",
     "static/media/DIAMOND-J.svg": "/oko/static/media/DIAMOND-J.60ea957f630031025a881ec7e957f641.svg",
     "static/media/HEART-K.svg": "/oko/static/media/HEART-K.7689c11468929a26deebf310131d890a.svg",
     "static/media/SPADE-J.svg": "/oko/static/media/SPADE-J.4d25d08d9316ee43707f6fbd5cf6c72c.svg",
@@ -107,11 +109,11 @@
     "static/media/as-pique.mp3": "/oko/static/media/as-pique.119f29fef9b050c62896.mp3",
     "static/media/DIAMOND-A.svg": "/oko/static/media/DIAMOND-A.b5b4b7553efd7124e706c889492baba6.svg",
     "index.html": "/oko/index.html",
-    "main.77339ece.css.map": "/oko/static/css/main.77339ece.css.map",
-    "main.50f85d67.js.map": "/oko/static/js/main.50f85d67.js.map"
+    "main.62bc6952.css.map": "/oko/static/css/main.62bc6952.css.map",
+    "main.bf8a9413.js.map": "/oko/static/js/main.bf8a9413.js.map"
   },
   "entrypoints": [
-    "static/css/main.77339ece.css",
-    "static/js/main.50f85d67.js"
+    "static/css/main.62bc6952.css",
+    "static/js/main.bf8a9413.js"
   ]
 }
