@@ -62,7 +62,7 @@
   font-size: 16px;
 }
 
-.button:hover, button:focus {
+.button:hover, .button:focus {
   border: 1px solid #1898d5;
   border-radius: 20px;
   cursor: pointer;
@@ -311,4 +311,17 @@ select {
 .gif {
   width: 400px;
   margin-top: 10px;
+}
+
+.login {
+  padding: 25px;
+  text-align: center;
+}
+
+.login input, button {
+  background-color: white;
+  border: 1px solid;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 5px;
 }

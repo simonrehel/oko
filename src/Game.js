@@ -4,6 +4,7 @@ import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import OkoDeck from "./OkoDeck";
 import BingoDeck from "./BingoDeck";
 import Patterns from "./Patterns";
+import Login from "./Login";
 import ascoeur from "./mp3/as-coeur.mp3";
 import deuxcoeur from "./mp3/deux-coeur.mp3";
 import troiscoeur from "./mp3/trois-coeur.mp3";
@@ -165,6 +166,8 @@ function Game() {
         setBalls(newBalls);
     };
 
+    const [loggedIn, setLoggedIn] = useState(false);
+
     const [oko, setOko] = useState(true);
 
     const [autoDraw, setAutoDraw] = useState(false);
@@ -239,57 +242,64 @@ function Game() {
 
     return (
         <div>
-            <div className="left-panel"> 
-                <Patterns/>
+            {   loggedIn &&
+                <div>
+                    <div className="left-panel"> 
+                        <Patterns/>
 
-                <div className="button-div"></div>
+                        <div className="button-div"></div>
 
-                <div className="button-div"><button className="button" onClick={() => restartConfirm() }>Recommencer la partie</button></div>
+                        <div className="button-div"><button className="button" onClick={() => restartConfirm() }>Recommencer la partie</button></div>
 
-                { oko &&
-                    <div>
-                        <div className="button-div"><button className="button" onClick={() => drawCard(cards)}>Tirer une carte</button></div>
-                        <div className="button-div"><button className="button" onClick={() => setAutoDraw(!autoDraw)}>{autoDraw ? 'Tirage auto  \u23F8' : 'Tirage auto  \u23F5'}</button></div>
+                        { oko &&
+                            <div>
+                                <div className="button-div"><button className="button" onClick={() => drawCard(cards)}>Tirer une carte</button></div>
+                                <div className="button-div"><button className="button" onClick={() => setAutoDraw(!autoDraw)}>{autoDraw ? 'Tirage auto  \u23F8' : 'Tirage auto  \u23F5'}</button></div>
+                            </div>
+                        }
+
+                        { !oko &&
+                            <div>
+                                <div className="button-div"><button className="button" onClick={() => drawBall(balls)}>Tirer une boule</button></div>
+                                <div className="button-div"><button className="button" onClick={() => setAutoDraw(!autoDraw)}>{autoDraw ? 'Tirage auto  \u23F8' : 'Tirage auto  \u23F5'}</button></div>
+                            </div>
+                        }
+
+                        { autoDraw && 
+                            <div className="delay">
+                                <button className="button" disabled={delay < 3} onClick={() => setDelay(delay - 1)}>-</button>
+                                { delay } secondes
+                                <button className="button" disabled={delay > 29} onClick={() => setDelay(delay + 1)}>+</button>
+                            </div>
+                        }
+
+                        <div className="button-div"><button className="button" onClick={() => {setOko(!oko); setAutoDraw(false)}}>{oko ? 'Aller au bingo' : 'Aller à OKO'}</button></div>
+
+                        { oko && muted && 
+                            <div className="button-div"><button className="button" onClick={() => setMuted(false)}>
+                                <img src={mutedspeaker} alt="Muted"></img></button>
+                            </div>
+                        }
+                        { oko && !muted && 
+                            <div className="button-div"><button className="button" onClick={() => setMuted(true)}>
+                                <img src={speaker} alt="Unmuted"></img></button>
+                            </div>
+                        }
+
                     </div>
-                }
-
-                { !oko &&
-                    <div>
-                        <div className="button-div"><button className="button" onClick={() => drawBall(balls)}>Tirer une boule</button></div>
-                        <div className="button-div"><button className="button" onClick={() => setAutoDraw(!autoDraw)}>{autoDraw ? 'Tirage auto  \u23F8' : 'Tirage auto  \u23F5'}</button></div>
+                    <div className="right-panel"> 
+                        { oko && 
+                            <OkoDeck cards={cards}/>
+                        }
+                        { !oko &&
+                            <BingoDeck balls={balls}/>
+                        }
                     </div>
-                }
-
-                { autoDraw && 
-                    <div className="delay">
-                        <button className="button" disabled={delay < 3} onClick={() => setDelay(delay - 1)}>-</button>
-                        { delay } secondes
-                        <button className="button" disabled={delay > 29} onClick={() => setDelay(delay + 1)}>+</button>
-                    </div>
-                }
-
-                <div className="button-div"><button className="button" onClick={() => {setOko(!oko); setAutoDraw(false)}}>{oko ? 'Aller au bingo' : 'Aller à OKO'}</button></div>
-
-                { oko && muted && 
-                    <div className="button-div"><button className="button" onClick={() => setMuted(false)}>
-                        <img src={mutedspeaker} alt="Muted"></img></button>
-                    </div>
-                }
-                { oko && !muted && 
-                    <div className="button-div"><button className="button" onClick={() => setMuted(true)}>
-                        <img src={speaker} alt="Unmuted"></img></button>
-                    </div>
-                }
-
-            </div>
-            <div className="right-panel"> 
-                { oko && 
-                    <OkoDeck cards={cards}/>
-                }
-                { !oko &&
-                    <BingoDeck balls={balls}/>
-                }
-            </div>
+                </div>
+            }
+            {   !loggedIn &&
+                <Login loggedIn={setLoggedIn}></Login>
+            }
         </div>
     );
 }
