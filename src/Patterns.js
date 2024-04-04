@@ -3,6 +3,7 @@ import Pattern from "./Pattern";
 
 function Patterns() {
     const patterns = {
+        "Aucun": [[]],
         "Centre": [[13]],
         "Ligne ou 4 coins": [[1,2,3,4,5], [1,6,11,16,21], [1,7,13,19,25], [1,5,21,25]],
         "Tour de carte": [[1,2,3,4,5,6,10,11,15,16,20,21,22, 23, 24, 25]],
