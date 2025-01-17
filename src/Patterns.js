@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Pattern from "./Pattern";
 
-function Patterns() {
+function Patterns(props) {
     const patterns = {
         "Aucun": [[]],
         "Centre": [[13]],
@@ -106,11 +106,13 @@ function Patterns() {
 
     useEffect(() => {
         let timer = setInterval(() => {
-            let index = currentSubPatternIndex + 1;
-            if (index === patterns[currentPatternName].length) {
-                index = 0;
+            if (props.flash || currentPatternName == "Ligne ou 4 coins") {
+                let index = currentSubPatternIndex + 1;
+                if (index === patterns[currentPatternName].length) {
+                    index = 0;
+                }
+                setCurrentSubPatternIndex(index);
             }
-            setCurrentSubPatternIndex(index);
         }, 2000);
         return () => {
             clearInterval(timer);

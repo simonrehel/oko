@@ -70,7 +70,14 @@
 }
 
 .button-div {
+  display:inline-block;
   width: 100%;
+  text-align: center;
+}
+
+.button-div-half {
+  display:inline-block;
+  width: 50%;
   text-align: center;
 }
 

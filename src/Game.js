@@ -57,6 +57,8 @@ import dixpique from "./mp3/dix-pique.mp3";
 import valetpique from "./mp3/valet-pique.mp3";
 import damepique from "./mp3/dame-pique.mp3";
 import roipique from "./mp3/roi-pique.mp3";
+import flashIcon from "./images/flash.png";
+import noFlashIcon from "./images/no-flash.png";
 import speaker from "./images/speaker.png";
 import mutedspeaker from "./images/muted-speaker.png";
 import cardsShuffling from "./images/cards-shuffling.gif";
@@ -172,6 +174,8 @@ function Game() {
 
     const [autoDraw, setAutoDraw] = useState(false);
 
+    const [flash, setFlash] = useState(true);
+
     const [muted, setMuted] = useState(true);
 
     const [delay, setDelay] = useState(5);
@@ -245,7 +249,7 @@ function Game() {
             {   loggedIn &&
                 <div>
                     <div className="left-panel"> 
-                        <Patterns/>
+                        <Patterns flash={flash}/>
 
                         <div className="button-div"></div>
 
@@ -274,18 +278,29 @@ function Game() {
                         }
 
                         <div className="button-div"><button className="button" onClick={() => {setOko(!oko); setAutoDraw(false)}}>{oko ? 'Aller au bingo' : 'Aller à OKO'}</button></div>
-
-                        { oko && muted && 
-                            <div className="button-div"><button className="button" onClick={() => setMuted(false)}>
-                                <img src={mutedspeaker} alt="Muted"></img></button>
-                            </div>
-                        }
-                        { oko && !muted && 
-                            <div className="button-div"><button className="button" onClick={() => setMuted(true)}>
-                                <img src={speaker} alt="Unmuted"></img></button>
-                            </div>
-                        }
-
+                        
+                        <div>
+                            { oko && flash && 
+                                <div className="button-div-half"><button className="button" onClick={() => setFlash(false)}>
+                                    <img src={flashIcon} alt="Flash"></img></button>
+                                </div>
+                            }
+                            { oko && !flash && 
+                                <div className="button-div-half"><button className="button" onClick={() => setFlash(true)}>
+                                    <img src={noFlashIcon} alt="No flash"></img></button>
+                                </div>
+                            }
+                            { oko && muted && 
+                                <div className="button-div-half"><button className="button" onClick={() => setMuted(false)}>
+                                    <img src={mutedspeaker} alt="Muted"></img></button>
+                                </div>
+                            }
+                            { oko && !muted && 
+                                <div className="button-div-half"><button className="button" onClick={() => setMuted(true)}>
+                                    <img src={speaker} alt="Unmuted"></img></button>
+                                </div>
+                            }
+                        </div>
                     </div>
                     <div className="right-panel"> 
                         { oko && 
