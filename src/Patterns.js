@@ -111,7 +111,7 @@ function Patterns(props) {
 
     useEffect(() => {
         let timer = setInterval(() => {
-            if (props.flash || currentPatternName == "Ligne ou 4 coins") {
+            if (props.flash || currentPatternName === "Ligne ou 4 coins") {
                 let index = currentSubPatternIndex + 1;
                 if (index === patterns[currentPatternName].length) {
                     index = 0;
